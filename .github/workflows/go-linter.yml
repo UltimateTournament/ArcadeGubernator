@@ -7,12 +7,11 @@
 name: Lint Code Base
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 jobs:
   run-lint:
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,6 +19,11 @@ jobs:
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18
           
       - name: Inject insteadOf configuration
         env:
@@ -28,4 +32,4 @@ jobs:
           git config --global url."https://x-oauth-basic:${PRIVATE_GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
+        uses: golangci/golangci-lint-action@v3
