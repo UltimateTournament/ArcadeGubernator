@@ -15,19 +15,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Fetch all tags
+      run: git fetch --force --tags
 
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.18
+        go-version: 1.17
         
     - name: Inject insteadOf configuration
       env:
         PRIVATE_GITHUB_TOKEN: ${{ secrets.PRIVATE_GITHUB_TOKEN }}
       run: |
         git config --global url."https://x-oauth-basic:${PRIVATE_GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
+
     - name: Build
       run: go build -v ./...
 
-#    - name: Test
-#      run: go test -v ./...
+    - name: Test
+      run: go test -v -count=1 ./...
