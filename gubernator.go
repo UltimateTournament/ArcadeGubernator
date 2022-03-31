@@ -52,7 +52,7 @@ func GenTransactionConfig(uniqueKey string) *gubernator.RateLimitReq {
 	}
 }
 
-func GenMatchmakingonfig(uniqueKey string) *gubernator.RateLimitReq {
+func GenMatchmakingConfig(uniqueKey string) *gubernator.RateLimitReq {
 	return &gubernator.RateLimitReq{
 		Name:      "matchmaking",
 		UniqueKey: uniqueKey,
