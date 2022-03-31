@@ -39,3 +39,15 @@ func GenRegisterConfig(uniqueKey string) *gubernator.RateLimitReq {
 		Behavior:  0,
 	}
 }
+
+func GenTransactionConfig(uniqueKey string) *gubernator.RateLimitReq {
+	return &gubernator.RateLimitReq{
+		Name:      "transaction",
+		UniqueKey: uniqueKey,
+		Hits:      1,
+		Limit:     5, // 5/min
+		Duration:  60000,
+		Algorithm: 0,
+		Behavior:  0,
+	}
+}
