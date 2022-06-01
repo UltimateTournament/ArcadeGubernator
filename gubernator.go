@@ -9,7 +9,7 @@ func GenGlobalIPConfig(uniqueKey string) *gubernator.RateLimitReq {
 		Name:      "global_ip",
 		UniqueKey: uniqueKey,
 		Hits:      1,
-		Limit:     60, // 60/min
+		Limit:     120, // 120/min
 		Duration:  60000,
 		Algorithm: 0,
 		Behavior:  0,
